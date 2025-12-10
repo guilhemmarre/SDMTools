@@ -147,7 +147,8 @@ ClassStat  = function(mat,cellsize=1,bkgd=NA,latlon=FALSE) {
 	}
 
 	######
-	#check if raster from sp or raster package and convert if necessary
+	#check if raster from terra, sp or raster package and convert if necessary
+	if (any(class(mat) %in% "SpatRaster")) mat = as.matrix(mat, wide = TRUE)
 	if (any(class(mat) %in% 'RasterLayer')) mat = asc.from.raster(mat)
 	if (any(class(mat) == 'SpatialGridDataFrame')) mat = asc.from.sp(mat)
 	#check to ensure matrix
